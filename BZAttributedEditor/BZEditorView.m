@@ -14,23 +14,44 @@
 @property (nonatomic, strong) BZEditorManager *manager;
 @property (nonatomic, strong, readwrite) UITextView *editor;
 @property (nonatomic, strong, readwrite) BZEditorEditType *currentType;
-
+@property (nonatomic, strong) BZEditorToolView *tool;
 @end
 @implementation BZEditorView
 
-- (instancetype)init {
-    if (self = [super init]) {
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
         self.manager = [[BZEditorManager alloc] init];
-        self.editor = [[UITextView alloc] init];
-        self.editor.delegate = self;
-        self.editor.returnKeyType = UIReturnKeyDone;
-        [self configDefaultStyle:nil];
+        self.editor.inputAccessoryView = self.tool;
+        [self addSubview:self.editor];
+    }
+    return self;
+}
+
+- (UITextView *)editor {
+    if (!_editor) {
+
+        NSTextContainer *container = [[NSTextContainer alloc] initWithSize:self.bounds.size];
+        _editor = [[UITextView alloc] initWithFrame:self.bounds];
+        _editor.delegate = self;
+        _editor.returnKeyType = UIReturnKeyDone;
+        _editor.backgroundColor = [UIColor systemBackgroundColor];
+        _editor.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+        [_editor becomeFirstResponder];
+        _editor.frame = self.bounds;
+        _editor.layoutManager.allowsNonContiguousLayout = NO;
         ///配置默认的输入状态
-        BZEditorToolView *tool = [[BZEditorToolView alloc] init];
-        tool.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 140);
+        [self configDefaultStyle:nil];
+    }
+    return _editor;
+}
+
+- (BZEditorToolView *)tool {
+    if (!_tool) {
+        _tool = [[BZEditorToolView alloc] init];
+        _tool.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 140);
 
         __block typeof(self) weakSelf = self;
-        tool.selectBlock = ^(BZEditorType type) {
+        _tool.selectBlock = ^(BZEditorType type) {
           
             if (type == BZEditorTypeB) {
                 weakSelf.currentType.useBold = !weakSelf.currentType.useBold;
@@ -78,7 +99,7 @@
             }
         };
         
-        tool.actionBlock = ^(BZEditorType type) {
+        _tool.actionBlock = ^(BZEditorType type) {
           
             if (type == BZEditorTypeAddImage) {
                 [weakSelf.editor addImage];
@@ -86,20 +107,11 @@
                 [weakSelf.editor addLink];
             }
         };
-        
-        self.editor.inputAccessoryView = tool;
-        [self addSubview:self.editor];
-        
-        self.editor.backgroundColor = [UIColor systemBackgroundColor];
-        [self.editor becomeFirstResponder];
     }
-    return self;
+    return _tool;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.editor.frame = self.bounds;
-}
+
 #pragma mark - Method
 - (void)configDefaultStyle:(NSDictionary *)type {
     if (type) {
@@ -116,4 +128,5 @@
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
     return YES;
 }
+
 @end

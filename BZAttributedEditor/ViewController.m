@@ -21,8 +21,7 @@
     self.title = @"editor";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"预览" style:(UIBarButtonItemStylePlain) target:self action:@selector(action)];
     
-    self.editorView = [[BZEditorView alloc] init];
-    self.editorView.frame = self.view.bounds;
+    self.editorView = [[BZEditorView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.editorView];
 }
 
