@@ -63,6 +63,12 @@
         [type setObject:@(NSUnderlineStyleSingle) forKey:NSUnderlineStyleAttributeName];
     }
     
+    if (currentType.useStrikethrough) {
+        [type setObject:@(NSUnderlineStyleSingle) forKey:NSBaselineOffsetAttributeName];
+        [type setObject:@(NSUnderlineStyleSingle | NSUnderlinePatternSolid) forKey:NSStrikethroughStyleAttributeName];
+        [type setObject:[UIColor redColor] forKey:NSStrikethroughColorAttributeName];
+    }
+    
     [type setObject:currentType.fontColor forKey:NSForegroundColorAttributeName];
     
     return type;

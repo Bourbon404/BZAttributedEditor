@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, BZEditorType) {
     BZEditorTypeB,
     BZEditorTypeI,
     BZEditorTypeU,
+    BZEditorTypeStrikethrough,
 
     BZEditorTypeFont0 = 16,
     BZEditorTypeFont1 = 18,
@@ -41,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL useItalics;
 @property (nonatomic, assign) BOOL useBold;
 @property (nonatomic, assign) BOOL useUnderline;
+@property (nonatomic, assign) BOOL useStrikethrough;
 
 + (BZEditorEditType *)defaultType;
 @end

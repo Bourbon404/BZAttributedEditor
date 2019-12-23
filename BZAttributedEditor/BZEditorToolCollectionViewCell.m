@@ -80,6 +80,8 @@
             textLabel.text = @"I";
         } else if (type == BZEditorTypeU) {
             textLabel.text = @"U";
+        } else if (type == BZEditorTypeStrikethrough) {
+            textLabel.text = @"-";
         }
     }
     

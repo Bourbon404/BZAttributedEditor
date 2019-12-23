@@ -78,7 +78,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (collectionView == self.toolCollection0) {
-        return 4;
+        return 5;
     } else if (collectionView == self.toolCollection1) {
         return 3;
     } else {

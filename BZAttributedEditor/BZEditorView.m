@@ -39,6 +39,10 @@
                 weakSelf.currentType.useUnderline = !weakSelf.currentType.useUnderline;
             }
             
+            if (type == BZEditorTypeStrikethrough) {
+                weakSelf.currentType.useStrikethrough = !weakSelf.currentType.useStrikethrough;
+            }
+            
             if (type == BZEditorTypeFont0 || type == BZEditorTypeFont1 || type == BZEditorTypeFont2) {
                 weakSelf.currentType.fontSize = type;
             }
