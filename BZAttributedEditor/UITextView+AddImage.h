@@ -1,5 +1,5 @@
 //
-//  UITextView+AddLink.h
+//  UITextView+AddImage.h
 //  BZAttributedEditor
 //
 //  Created by 郑伟 on 2019/12/23.
@@ -10,8 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UITextView (AddLink)
-- (void)addLink;
+@interface UITextView (AddImage)
+
+- (void)addImage;
 @end
 
 NS_ASSUME_NONNULL_END

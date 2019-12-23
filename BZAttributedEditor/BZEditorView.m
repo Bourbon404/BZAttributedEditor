@@ -9,6 +9,7 @@
 #import "BZEditorView.h"
 #import "BZEditorToolView.h"
 #import "UITextView+AddLink.h"
+#import "UITextView+AddImage.h"
 @interface BZEditorView () <UITextViewDelegate>
 @property (nonatomic, strong) BZEditorManager *manager;
 @property (nonatomic, strong, readwrite) UITextView *editor;
@@ -80,11 +81,9 @@
         tool.actionBlock = ^(BZEditorType type) {
           
             if (type == BZEditorTypeAddImage) {
-                
+                [weakSelf.editor addImage];
             } else if (type == BZEditorTypeAddLink) {
-                [weakSelf showLinkAlert:^(NSString *link) {
-                    [weakSelf.editor addLinkWithURL:link placeText:@"链接地址"];
-                }];
+                [weakSelf.editor addLink];
             }
         };
         
@@ -112,31 +111,7 @@
     self.editor.typingAttributes = [self.manager currentAttributeWithType:self.currentType];
 }
 
-- (void)showLinkAlert:(void (^)(NSString *link))block {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"插入链接" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = @"请输入链接";
-    }];
-    
-    UIAlertAction *done = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        UITextField *field = [alert textFields].firstObject;
-        if (field.text.length) {
-            if (block) {
-                block(field.text);
-            }
-        }
-    }];
-    [alert addAction:done];
 
-    UIWindow *window = nil;
-    for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes) {
-        if (windowScene.activationState == UISceneActivationStateForegroundActive) {
-            window = windowScene.windows.firstObject;
-            break;
-        }
-    }
-    [window.rootViewController presentViewController:alert animated:YES completion:nil];
-}
 #pragma mark - UITextView Delegate
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
     return YES;
