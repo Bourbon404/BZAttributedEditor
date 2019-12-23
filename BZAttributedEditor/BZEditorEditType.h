@@ -30,6 +30,8 @@ typedef NS_ENUM(NSInteger, BZEditorType) {
     BZEditorTypePurple,
     
     BZEditorTypeAddImage = 40,
+    BZEditorTypeAddLink,
+    
 };
 
 NS_ASSUME_NONNULL_BEGIN

@@ -49,7 +49,7 @@
     
     colorLayer.hidden = YES;
     textLabel.hidden = YES;
-    if (type >= BZEditorTypeBlack) {
+    if (type >= BZEditorTypeBlack && type <= BZEditorTypePurple) {
         colorLayer.hidden = NO;
         UIColor *color = [UIColor blackColor];
         if (type == BZEditorTypeRed) {
@@ -94,6 +94,16 @@
         } else if (type == BZEditorTypeFont2) {
             textLabel.text = @"H5";
         }
+    }
+    
+    if (type == BZEditorTypeAddImage) {
+        textLabel.hidden = NO;
+        textLabel.text = @"A";
+    }
+    
+    if (type == BZEditorTypeAddLink) {
+        textLabel.hidden = NO;
+        textLabel.text = @"L";
     }
 }
 

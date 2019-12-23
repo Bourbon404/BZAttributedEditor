@@ -16,6 +16,7 @@
 		9FE80F9323AB815200616902 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FE80F9223AB815200616902 /* main.m */; };
 		9FE80F9B23AB9C1800616902 /* WKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FE80F9A23AB9C1800616902 /* WKViewController.m */; };
 		9FE80F9E23AB9CB000616902 /* BZEditorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FE80F9D23AB9CB000616902 /* BZEditorManager.m */; };
+		9FF5A93323B0A04700FDDC31 /* UITextView+AddLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF5A93223B0A04700FDDC31 /* UITextView+AddLink.m */; };
 		9FF6C2BD23B067F300DE9371 /* BZEditorEditType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6C2BC23B067F300DE9371 /* BZEditorEditType.m */; };
 		9FF6F7EC23AC9F6E0098DD2D /* BZEditorToolCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6F7E823AC9F6E0098DD2D /* BZEditorToolCollectionViewCell.m */; };
 		9FF6F7ED23AC9F6E0098DD2D /* BZEditorToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6F7EA23AC9F6E0098DD2D /* BZEditorToolView.m */; };
@@ -39,6 +40,8 @@
 		9FE80F9A23AB9C1800616902 /* WKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKViewController.m; sourceTree = "<group>"; };
 		9FE80F9C23AB9CB000616902 /* BZEditorManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BZEditorManager.h; sourceTree = "<group>"; };
 		9FE80F9D23AB9CB000616902 /* BZEditorManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BZEditorManager.m; sourceTree = "<group>"; };
+		9FF5A93123B0A04700FDDC31 /* UITextView+AddLink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UITextView+AddLink.h"; path = "../../../../../System/Volumes/Data/Users/bourbonz/Documents/BZAttributedEditor/BZAttributedEditor/UITextView+AddLink.h"; sourceTree = "<group>"; };
+		9FF5A93223B0A04700FDDC31 /* UITextView+AddLink.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UITextView+AddLink.m"; path = "../../../../../System/Volumes/Data/Users/bourbonz/Documents/BZAttributedEditor/BZAttributedEditor/UITextView+AddLink.m"; sourceTree = "<group>"; };
 		9FF6C2BB23B067F300DE9371 /* BZEditorEditType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BZEditorEditType.h; path = ../../../../../System/Volumes/Data/Users/bourbonz/Documents/BZAttributedEditor/BZAttributedEditor/BZEditorEditType.h; sourceTree = "<group>"; };
 		9FF6C2BC23B067F300DE9371 /* BZEditorEditType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BZEditorEditType.m; path = ../../../../../System/Volumes/Data/Users/bourbonz/Documents/BZAttributedEditor/BZAttributedEditor/BZEditorEditType.m; sourceTree = "<group>"; };
 		9FF6F7E623AC9F6E0098DD2D /* BZEditorToolCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZEditorToolCollectionViewCell.h; path = ../../../../../System/Volumes/Data/Users/bourbonz/Documents/BZAttributedEditor/BZAttributedEditor/BZEditorToolCollectionViewCell.h; sourceTree = "<group>"; };
@@ -89,6 +92,8 @@
 				9FF6F7EA23AC9F6E0098DD2D /* BZEditorToolView.m */,
 				9FF6F7E723AC9F6E0098DD2D /* BZEditorView.h */,
 				9FF6F7EB23AC9F6E0098DD2D /* BZEditorView.m */,
+				9FF5A93123B0A04700FDDC31 /* UITextView+AddLink.h */,
+				9FF5A93223B0A04700FDDC31 /* UITextView+AddLink.m */,
 				9FE80F8023AB814600616902 /* AppDelegate.h */,
 				9FE80F8123AB814600616902 /* AppDelegate.m */,
 				9FE80F8323AB814600616902 /* SceneDelegate.h */,
@@ -180,6 +185,7 @@
 				9FE80F9B23AB9C1800616902 /* WKViewController.m in Sources */,
 				9FE80F8823AB814600616902 /* ViewController.m in Sources */,
 				9FE80F8223AB814600616902 /* AppDelegate.m in Sources */,
+				9FF5A93323B0A04700FDDC31 /* UITextView+AddLink.m in Sources */,
 				9FF6C2BD23B067F300DE9371 /* BZEditorEditType.m in Sources */,
 				9FF6F7EC23AC9F6E0098DD2D /* BZEditorToolCollectionViewCell.m in Sources */,
 				9FF6F7EE23AC9F6E0098DD2D /* BZEditorView.m in Sources */,

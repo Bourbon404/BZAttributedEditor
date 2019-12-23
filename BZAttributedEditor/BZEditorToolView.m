@@ -9,11 +9,14 @@
 #import "BZEditorToolView.h"
 #import "BZEditorToolCollectionViewCell.h"
 #import "BZEditorManager.h"
-@interface BZEditorToolView () <UICollectionViewDataSource, UICollectionViewDelegate>
-@property (nonatomic, strong) NSMutableArray *allMenuArray;
+@interface BZEditorToolView () <UICollectionViewDataSource, UICollectionViewDelegate> {
+    NSMutableArray *allToolArray;
+}
+
 @property (nonatomic, strong) UICollectionView *toolCollection0;
 @property (nonatomic, strong) UICollectionView *toolCollection1;
 @property (nonatomic, strong) UICollectionView *toolCollection2;
+@property (nonatomic, strong) UICollectionView *toolCollection3;
 
 @end
 @implementation BZEditorToolView
@@ -28,24 +31,28 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        
-        self.allMenuArray = [NSMutableArray array];
-        for (int i = 0; i < 10; i ++) {
-            [self.allMenuArray addObject:@(i)];
-        }
     
+        allToolArray = [NSMutableArray array];
+        
         self.toolCollection0 = [self createCollectoin];
         self.toolCollection0.allowsMultipleSelection = YES;
         [self addSubview:self.toolCollection0];
+        [allToolArray addObject:self.toolCollection0];
         
         self.toolCollection1 = [self createCollectoin];
         self.toolCollection1.allowsMultipleSelection = NO;
         [self addSubview:self.toolCollection1];
+        [allToolArray addObject:self.toolCollection1];
         
         self.toolCollection2 = [self createCollectoin];
         self.toolCollection2.allowsMultipleSelection = NO;
         [self addSubview:self.toolCollection2];
+        [allToolArray addObject:self.toolCollection2];
         
+        self.toolCollection3 = [self createCollectoin];
+        self.toolCollection3.allowsMultipleSelection = NO;
+        [self addSubview:self.toolCollection3];
+        [allToolArray addObject:self.toolCollection3];
         
         self.backgroundColor = [UIColor systemBackgroundColor];
     }
@@ -55,10 +62,11 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     CGFloat space = 5;
-    CGFloat height = (self.frame.size.height - 4 * space) / 3.0;
+    CGFloat height = (self.frame.size.height - 4 * space) / allToolArray.count;
     self.toolCollection0.frame = CGRectMake(0, space, self.frame.size.width, height);
     self.toolCollection1.frame = CGRectMake(0, CGRectGetMaxY(self.toolCollection0.frame) + space, self.frame.size.width, height);
     self.toolCollection2.frame = CGRectMake(0, CGRectGetMaxY(self.toolCollection1.frame) + space, self.frame.size.width, height);
+    self.toolCollection3.frame = CGRectMake(0, CGRectGetMaxY(self.toolCollection2.frame) + space, self.frame.size.width, height);
 }
 
 - (UICollectionView *)createCollectoin {
@@ -81,8 +89,12 @@
         return 5;
     } else if (collectionView == self.toolCollection1) {
         return 3;
-    } else {
+    } else if (collectionView == self.toolCollection2) {
         return 8;
+    } else if (collectionView == self.toolCollection3) {
+        return 2;
+    } else {
+        return 0;
     }
 }
 
@@ -99,8 +111,10 @@
         } else if (indexPath.item == 2) {
             cell.type = BZEditorTypeFont2;
         }
-    } else {
+    } else if (collectionView == self.toolCollection2) {
         cell.type = BZEditorTypeBlack + indexPath.item;
+    } else if (collectionView == self.toolCollection3) {
+        cell.type = BZEditorTypeAddImage + indexPath.item;
     }
     
     return cell;
@@ -108,17 +122,28 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (self.selectAction) {
-        BZEditorToolCollectionViewCell *cell = (BZEditorToolCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        self.selectAction(cell.type);
+    BZEditorToolCollectionViewCell *cell = (BZEditorToolCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+
+    if (self.selectBlock && cell.type < BZEditorTypeAddImage) {
+        self.selectBlock(cell.type);
+    }
+    
+    
+    if (self.actionBlock && cell.type >= BZEditorTypeAddImage) {
+        [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+        if (self.actionBlock) {
+            self.actionBlock(cell.type);
+        }
     }
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.selectAction) {
-        BZEditorToolCollectionViewCell *cell = (BZEditorToolCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        self.selectAction(cell.type);
+    
+    BZEditorToolCollectionViewCell *cell = (BZEditorToolCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+
+    if (self.selectBlock && cell.type < BZEditorTypeAddImage) {
+        self.selectBlock(cell.type);
     }
 }
 

@@ -8,7 +8,8 @@
 
 #import "BZEditorView.h"
 #import "BZEditorToolView.h"
-@interface BZEditorView ()
+#import "UITextView+AddLink.h"
+@interface BZEditorView () <UITextViewDelegate>
 @property (nonatomic, strong) BZEditorManager *manager;
 @property (nonatomic, strong, readwrite) UITextView *editor;
 @property (nonatomic, strong, readwrite) BZEditorEditType *currentType;
@@ -20,14 +21,15 @@
     if (self = [super init]) {
         self.manager = [[BZEditorManager alloc] init];
         self.editor = [[UITextView alloc] init];
+        self.editor.delegate = self;
         self.editor.returnKeyType = UIReturnKeyDone;
         [self configDefaultStyle:nil];
         ///配置默认的输入状态
         BZEditorToolView *tool = [[BZEditorToolView alloc] init];
-        tool.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 110);
+        tool.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 140);
 
         __block typeof(self) weakSelf = self;
-        tool.selectAction = ^(BZEditorType type) {
+        tool.selectBlock = ^(BZEditorType type) {
           
             if (type == BZEditorTypeB) {
                 weakSelf.currentType.useBold = !weakSelf.currentType.useBold;
@@ -75,6 +77,17 @@
             }
         };
         
+        tool.actionBlock = ^(BZEditorType type) {
+          
+            if (type == BZEditorTypeAddImage) {
+                
+            } else if (type == BZEditorTypeAddLink) {
+                [weakSelf showLinkAlert:^(NSString *link) {
+                    [weakSelf.editor addLinkWithURL:link placeText:@"链接地址"];
+                }];
+            }
+        };
+        
         self.editor.inputAccessoryView = tool;
         [self addSubview:self.editor];
         
@@ -88,7 +101,7 @@
     [super layoutSubviews];
     self.editor.frame = self.bounds;
 }
-
+#pragma mark - Method
 - (void)configDefaultStyle:(NSDictionary *)type {
     if (type) {
 
@@ -97,5 +110,35 @@
     }
     
     self.editor.typingAttributes = [self.manager currentAttributeWithType:self.currentType];
+}
+
+- (void)showLinkAlert:(void (^)(NSString *link))block {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"插入链接" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"请输入链接";
+    }];
+    
+    UIAlertAction *done = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *field = [alert textFields].firstObject;
+        if (field.text.length) {
+            if (block) {
+                block(field.text);
+            }
+        }
+    }];
+    [alert addAction:done];
+
+    UIWindow *window = nil;
+    for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes) {
+        if (windowScene.activationState == UISceneActivationStateForegroundActive) {
+            window = windowScene.windows.firstObject;
+            break;
+        }
+    }
+    [window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
+#pragma mark - UITextView Delegate
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    return YES;
 }
 @end

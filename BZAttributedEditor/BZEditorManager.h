@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSAttributedString *)strToAttriWithStr:(NSString *)htmlStr;
 
 
+/// 返回特定的输入样式
+/// @param currentType 当前的输入样式
 - (NSDictionary *)currentAttributeWithType:(BZEditorEditType *)currentType;
 @end
 
