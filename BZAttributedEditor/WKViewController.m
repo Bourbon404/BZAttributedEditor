@@ -19,6 +19,7 @@
     // Do any additional setup after loading the view.
     
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    printf("%s", [self.html cStringUsingEncoding:NSUTF8StringEncoding]);
     self.webview = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
     [self.view addSubview:self.webview];
     [self.webview loadHTMLString:self.html baseURL:nil];
