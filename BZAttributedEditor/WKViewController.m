@@ -19,6 +19,11 @@
     // Do any additional setup after loading the view.
     
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    NSString *jSString = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+    //用于进行JavaScript注入
+    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jSString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    [config.userContentController addUserScript:wkUScript];
+    
     printf("%s", [self.html cStringUsingEncoding:NSUTF8StringEncoding]);
     self.webview = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
     [self.view addSubview:self.webview];
