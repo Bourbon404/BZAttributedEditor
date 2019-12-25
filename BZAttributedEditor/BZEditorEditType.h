@@ -32,6 +32,10 @@ typedef NS_ENUM(NSInteger, BZEditorType) {
     BZEditorTypeAddImage = 40,
     BZEditorTypeAddLink,
     
+    BZEditorTypeParagraphLeft = 50,
+    BZEditorTypeParagraphCenter,
+    BZEditorTypeParagraphRight,
+
 };
 
 NS_ASSUME_NONNULL_BEGIN
@@ -45,6 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL useBold;
 @property (nonatomic, assign) BOOL useUnderline;
 @property (nonatomic, assign) BOOL useStrikethrough;
+@property (nonatomic, assign) BZEditorType paragraphStyle;
 
 + (BZEditorEditType *)defaultType;
 @end

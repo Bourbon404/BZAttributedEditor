@@ -16,6 +16,7 @@
 		9FE80F9323AB815200616902 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FE80F9223AB815200616902 /* main.m */; };
 		9FE80F9B23AB9C1800616902 /* WKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FE80F9A23AB9C1800616902 /* WKViewController.m */; };
 		9FE80F9E23AB9CB000616902 /* BZEditorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FE80F9D23AB9CB000616902 /* BZEditorManager.m */; };
+		9FEC60C523B348C200F7FA51 /* 1.html in Resources */ = {isa = PBXBuildFile; fileRef = 9FEC60C423B348C200F7FA51 /* 1.html */; };
 		9FF5A93323B0A04700FDDC31 /* UITextView+AddLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF5A93223B0A04700FDDC31 /* UITextView+AddLink.m */; };
 		9FF5A93623B0A70400FDDC31 /* UITextView+AddImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF5A93523B0A70400FDDC31 /* UITextView+AddImage.m */; };
 		9FF6C2BD23B067F300DE9371 /* BZEditorEditType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6C2BC23B067F300DE9371 /* BZEditorEditType.m */; };
@@ -41,6 +42,7 @@
 		9FE80F9A23AB9C1800616902 /* WKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKViewController.m; sourceTree = "<group>"; };
 		9FE80F9C23AB9CB000616902 /* BZEditorManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BZEditorManager.h; sourceTree = "<group>"; };
 		9FE80F9D23AB9CB000616902 /* BZEditorManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BZEditorManager.m; sourceTree = "<group>"; };
+		9FEC60C423B348C200F7FA51 /* 1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = 1.html; path = ../../../../../System/Volumes/Data/Users/bourbonz/Documents/BZAttributedEditor/BZAttributedEditor/1.html; sourceTree = "<group>"; };
 		9FF5A93123B0A04700FDDC31 /* UITextView+AddLink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UITextView+AddLink.h"; path = "../../../../../System/Volumes/Data/Users/bourbonz/Documents/BZAttributedEditor/BZAttributedEditor/UITextView+AddLink.h"; sourceTree = "<group>"; };
 		9FF5A93223B0A04700FDDC31 /* UITextView+AddLink.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UITextView+AddLink.m"; path = "../../../../../System/Volumes/Data/Users/bourbonz/Documents/BZAttributedEditor/BZAttributedEditor/UITextView+AddLink.m"; sourceTree = "<group>"; };
 		9FF5A93423B0A70400FDDC31 /* UITextView+AddImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UITextView+AddImage.h"; path = "../../../../../System/Volumes/Data/Users/bourbonz/Documents/BZAttributedEditor/BZAttributedEditor/UITextView+AddImage.h"; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		9FE80F7F23AB814600616902 /* BZAttributedEditor */ = {
 			isa = PBXGroup;
 			children = (
+				9FEC60C423B348C200F7FA51 /* 1.html */,
 				9FF6C2BB23B067F300DE9371 /* BZEditorEditType.h */,
 				9FF6C2BC23B067F300DE9371 /* BZEditorEditType.m */,
 				9FE80F9C23AB9CB000616902 /* BZEditorManager.h */,
@@ -175,6 +178,7 @@
 			files = (
 				9FE80F9023AB815200616902 /* LaunchScreen.storyboard in Resources */,
 				9FE80F8D23AB815200616902 /* Assets.xcassets in Resources */,
+				9FEC60C523B348C200F7FA51 /* 1.html in Resources */,
 				9FE80F8B23AB814600616902 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

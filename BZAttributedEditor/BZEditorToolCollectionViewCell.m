@@ -105,6 +105,21 @@
         textLabel.hidden = NO;
         textLabel.text = @"L";
     }
+    
+    if (type == BZEditorTypeParagraphLeft) {
+        textLabel.hidden = NO;
+        textLabel.text = @"PL";
+    }
+    
+    if (type == BZEditorTypeParagraphCenter) {
+        textLabel.hidden = NO;
+        textLabel.text = @"PC";
+    }
+    
+    if (type == BZEditorTypeParagraphRight) {
+        textLabel.hidden = NO;
+        textLabel.text = @"PR";
+    }
 }
 
 @end

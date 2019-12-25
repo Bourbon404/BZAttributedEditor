@@ -16,6 +16,7 @@ typedef void(^DidSelectToolWitAction)(BZEditorType type);
 @interface BZEditorToolView : UIView
 @property (nonatomic, copy) DidSelectToolWitType selectBlock;
 @property (nonatomic, copy) DidSelectToolWitAction actionBlock;
+@property (nonatomic, strong, readonly) NSMutableArray <UICollectionView *>*allToolArray;
 
 @end
 

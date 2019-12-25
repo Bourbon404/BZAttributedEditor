@@ -23,6 +23,12 @@
     
     self.editorView = [[BZEditorView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.editorView];
+    
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"html"];
+//    NSString *string = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+//    NSAttributedString *att = [BZEditorManager strToAttriWithStr:string];
+//    NSLog(@"%@",att);
+//    self.editorView.editor.attributedText = att;
 }
 
 - (void)action {

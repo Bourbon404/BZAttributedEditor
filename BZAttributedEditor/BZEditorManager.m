@@ -69,6 +69,16 @@
         [type setObject:[UIColor redColor] forKey:NSStrikethroughColorAttributeName];
     }
     
+    NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    if (currentType.paragraphStyle == BZEditorTypeParagraphLeft) {
+        [paragraphStyle setAlignment:(NSTextAlignmentLeft)];
+    } else if (currentType.paragraphStyle == BZEditorTypeParagraphCenter) {
+        [paragraphStyle setAlignment:(NSTextAlignmentCenter)];
+    } else if (currentType.paragraphStyle == BZEditorTypeParagraphRight) {
+        [paragraphStyle setAlignment:(NSTextAlignmentRight)];
+    }
+    [type setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
+    
     [type setObject:currentType.fontColor forKey:NSForegroundColorAttributeName];
     
     return type;

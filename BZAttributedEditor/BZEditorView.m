@@ -48,7 +48,7 @@
 - (BZEditorToolView *)tool {
     if (!_tool) {
         _tool = [[BZEditorToolView alloc] init];
-        _tool.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 140);
+        _tool.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, (40) * _tool.allToolArray.count - 5);
 
         __block typeof(self) weakSelf = self;
         _tool.selectBlock = ^(BZEditorType type) {
@@ -87,6 +87,10 @@
                 weakSelf.currentType.fontColor = [UIColor systemBlueColor];
             } else if (type == BZEditorTypePurple) {
                 weakSelf.currentType.fontColor = [UIColor systemPurpleColor];
+            }
+            
+            if (type >= BZEditorTypeParagraphLeft && type <= BZEditorTypeParagraphRight) {
+                weakSelf.currentType.paragraphStyle = type;
             }
             
             if (type == BZEditorTypeNormal) {
