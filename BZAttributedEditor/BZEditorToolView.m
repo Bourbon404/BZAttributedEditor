@@ -136,7 +136,7 @@
     }
     
     
-    if (self.actionBlock && cell.type >= BZEditorTypeAddImage) {
+    if (self.actionBlock && cell.type >= BZEditorTypeAddImage && cell.type <= BZEditorTypeAddLink) {
         [collectionView deselectItemAtIndexPath:indexPath animated:YES];
         if (self.actionBlock) {
             self.actionBlock(cell.type);
