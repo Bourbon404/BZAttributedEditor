@@ -96,6 +96,10 @@
             NSDictionary *typeAttribute = [weakSelf.manager currentAttributeWithType:weakSelf.currentType];
             if (weakSelf.editor.selectedTextRange.empty) {
                 weakSelf.editor.typingAttributes = typeAttribute;
+            } else {
+                NSMutableAttributedString *attribute = [weakSelf.editor.attributedText mutableCopy];
+                [attribute setAttributes:typeAttribute range:weakSelf.editor.selectedRange];
+                [weakSelf.editor setAttributedText:attribute];
             }
         };
         
