@@ -10,12 +10,14 @@
 #import "BZEditorToolView.h"
 #import "UITextView+AddLink.h"
 #import "UITextView+AddImage.h"
+
 @interface BZEditorView () <UITextViewDelegate>
 @property (nonatomic, strong) BZEditorManager *manager;
 @property (nonatomic, strong, readwrite) UITextView *editor;
 @property (nonatomic, strong, readwrite) BZEditorEditType *currentType;
 @property (nonatomic, strong) BZEditorToolView *tool;
 @end
+
 @implementation BZEditorView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -29,8 +31,6 @@
 
 - (UITextView *)editor {
     if (!_editor) {
-
-        NSTextContainer *container = [[NSTextContainer alloc] initWithSize:self.bounds.size];
         _editor = [[UITextView alloc] initWithFrame:self.bounds];
         _editor.delegate = self;
         _editor.returnKeyType = UIReturnKeyDone;

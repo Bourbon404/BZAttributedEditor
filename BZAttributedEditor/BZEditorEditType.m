@@ -14,6 +14,7 @@
     BZEditorEditType *type = [[BZEditorEditType alloc] init];
     type.fontSize = BZEditorTypeFont0;
     type.fontColor = [UIColor blackColor];
+    type.paragraphStyle = BZEditorTypeParagraphLeft;
     return type;
 }
 @end
