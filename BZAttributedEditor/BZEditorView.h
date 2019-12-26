@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "BZEditorManager.h"
+#import "BZEditorToolView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BZEditorView : UIView
 @property (nonatomic, strong, readonly) UITextView *editor;
+@property (nonatomic, strong, readonly) BZEditorToolView *tool;
 
 @property (nonatomic, strong, readonly) BZEditorEditType *currentType;
 

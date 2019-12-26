@@ -7,7 +7,6 @@
 //
 
 #import "BZEditorView.h"
-#import "BZEditorToolView.h"
 #import "UITextView+AddLink.h"
 #import "UITextView+AddImage.h"
 
@@ -15,7 +14,7 @@
 @property (nonatomic, strong) BZEditorManager *manager;
 @property (nonatomic, strong, readwrite) UITextView *editor;
 @property (nonatomic, strong, readwrite) BZEditorEditType *currentType;
-@property (nonatomic, strong) BZEditorToolView *tool;
+@property (nonatomic, strong, readwrite) BZEditorToolView *tool;
 @end
 
 @implementation BZEditorView
@@ -25,6 +24,7 @@
         self.manager = [[BZEditorManager alloc] init];
         self.editor.inputAccessoryView = self.tool;
         [self addSubview:self.editor];
+        [self.editor becomeFirstResponder];
     }
     return self;
 }
@@ -37,7 +37,6 @@
         _editor.returnKeyType = UIReturnKeyDone;
         _editor.backgroundColor = [UIColor systemBackgroundColor];
         _editor.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        [_editor becomeFirstResponder];
         _editor.frame = self.bounds;
         _editor.layoutManager.allowsNonContiguousLayout = NO;
         ///配置默认的输入状态
@@ -53,7 +52,7 @@
         _tool.delegate = self;
         __block typeof(self) weakSelf = self;
         _tool.closeBlock = ^{
-            [weakSelf.editor resignFirstResponder];
+            [weakSelf.editor endEditing:YES];
         };
         
         _tool.selectBlock = ^(BZEditorType type) {
