@@ -29,14 +29,18 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.editor.frame = self.bounds;
+}
+
 - (UITextView *)editor {
     if (!_editor) {
         _editor = [[UITextView alloc] initWithFrame:self.bounds];
         _editor.delegate = self;
-        _editor.textContainerInset = UIEdgeInsetsMake(15, 5, 0, 5);
+        _editor.textContainerInset = UIEdgeInsetsMake(15, 5, 15, 5);
         _editor.returnKeyType = UIReturnKeyDone;
         _editor.backgroundColor = [UIColor systemBackgroundColor];
-        _editor.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         _editor.frame = self.bounds;
         _editor.layoutManager.allowsNonContiguousLayout = NO;
         ///配置默认的输入状态

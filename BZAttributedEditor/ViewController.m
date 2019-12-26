@@ -29,6 +29,9 @@
 //    NSAttributedString *att = [BZEditorManager strToAttriWithStr:string];
 //    NSLog(@"%@",att);
 //    self.editorView.editor.attributedText = att;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)action {
@@ -37,6 +40,23 @@
     WKViewController *web = [[WKViewController alloc] init];
     web.html = html;
     [self.navigationController pushViewController:web animated:YES];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notify {
+
+    CGFloat keyboardHeight = [[notify.userInfo objectForKey:UIKeyboardBoundsUserInfoKey] CGRectValue].size.height;
+    CGRect rect = self.view.bounds;
+    rect.size.height = self.view.bounds.size.height - /*self.editorView.editor.inputAccessoryView.frame.size.height - */ keyboardHeight;
+    [UIView animateWithDuration:0.25f animations:^{
+        
+        self.editorView.frame = rect;
+    }];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notif {
+    [UIView animateWithDuration:0.25f animations:^{
+        self.editorView.frame = self.view.bounds;
+    }];
 }
 
 @end
