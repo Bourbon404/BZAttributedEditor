@@ -42,6 +42,7 @@
         _editor.returnKeyType = UIReturnKeyDone;
         _editor.backgroundColor = [UIColor systemBackgroundColor];
         _editor.frame = self.bounds;
+        _editor.allowsEditingTextAttributes = YES;
         _editor.layoutManager.allowsNonContiguousLayout = NO;
         ///配置默认的输入状态
         [self configDefaultStyle:nil];
