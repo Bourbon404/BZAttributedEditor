@@ -52,6 +52,10 @@
         _tool.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, (40) * _tool.allToolArray.count - 5);
         _tool.delegate = self;
         __block typeof(self) weakSelf = self;
+        _tool.closeBlock = ^{
+            [weakSelf.editor resignFirstResponder];
+        };
+        
         _tool.selectBlock = ^(BZEditorType type) {
           
             BZEditorEditType *editType = nil;

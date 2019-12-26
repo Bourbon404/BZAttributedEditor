@@ -10,8 +10,9 @@
 #import "BZEditorEditType.h"
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^DidSelectToolWitType)(BZEditorType type);
-typedef void(^DidSelectToolWitAction)(BZEditorType type);
+typedef void(^DidSelectToolWithType)(BZEditorType type);
+typedef void(^DidSelectToolWithAction)(BZEditorType type);
+typedef void(^DidSelectToolWithClose) (void);
 
 @protocol BZEditorToolViewDelegate <NSObject>
 
@@ -21,8 +22,10 @@ typedef void(^DidSelectToolWitAction)(BZEditorType type);
 @end
 
 @interface BZEditorToolView : UIView
-@property (nonatomic, copy) DidSelectToolWitType selectBlock;
-@property (nonatomic, copy) DidSelectToolWitAction actionBlock;
+@property (nonatomic, copy) DidSelectToolWithType selectBlock;
+@property (nonatomic, copy) DidSelectToolWithAction actionBlock;
+@property (nonatomic, copy) DidSelectToolWithClose closeBlock;
+
 @property (nonatomic, weak) id <BZEditorToolViewDelegate>delegate;
 @property (nonatomic, strong, readonly) NSMutableArray <UICollectionView *>*allToolArray;
 

@@ -97,7 +97,7 @@
     } else if (collectionView == self.toolCollection3) {
         return 2;
     } else if (collectionView == self.toolCollection4){
-        return 3;
+        return 4;
     }
     return 0;
 }
@@ -149,6 +149,21 @@
         if (self.actionBlock) {
             self.actionBlock(cell.type);
         }
+    }
+    
+    if (cell.type == BZEditorTypeNormal) {
+        [self.allToolArray enumerateObjectsUsingBlock:^(UICollectionView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (view != self.toolCollection4) {
+                [view.indexPathsForSelectedItems enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [view deselectItemAtIndexPath:obj animated:YES];
+                }];
+            }
+        }];
+    }
+    
+    if (cell.type == BZEditorTypeClose) {
+        self.closeBlock();
+        [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     }
 }
 

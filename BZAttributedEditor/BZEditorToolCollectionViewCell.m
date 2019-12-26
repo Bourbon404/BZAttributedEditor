@@ -31,6 +31,11 @@
         textLabel.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:textLabel];
         textLabel.hidden = YES;
+        
+        UIView *selectView = [[UIView alloc] init];
+        selectView.backgroundColor = [UIColor darkGrayColor];
+        selectView.frame = self.bounds;
+        self.selectedBackgroundView = selectView;
     } return self;
 }
 
@@ -39,10 +44,8 @@
     
     if (selected) {
         textLabel.textColor = [UIColor whiteColor];
-        self.backgroundColor = [UIColor darkGrayColor];
     } else {
         textLabel.textColor = [UIColor blackColor];
-        self.backgroundColor = nil;
     }
 }
 
@@ -121,6 +124,11 @@
     if (type == BZEditorTypeParagraphRight) {
         textLabel.hidden = NO;
         textLabel.text = @"\U0000e625";
+    }
+    
+    if (type == BZEditorTypeClose) {
+        textLabel.hidden = NO;
+        textLabel.text = @"\U0000e639";
     }
 }
 
