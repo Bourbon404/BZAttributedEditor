@@ -81,7 +81,6 @@
     toolCollection.backgroundColor = [UIColor systemGray4Color];
     toolCollection.dataSource = self;
     toolCollection.delegate = self;
-    toolCollection.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
     [toolCollection registerClass:[BZEditorToolCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     toolCollection.showsHorizontalScrollIndicator = NO;
     toolCollection.showsVerticalScrollIndicator = NO;
@@ -127,6 +126,15 @@
     return cell;
 }
 
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.delegate respondsToSelector:@selector(toolViewCanSelectCurrentType:)]) {
+        BZEditorToolCollectionViewCell *cell = (BZEditorToolCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        return [self.delegate toolViewCanSelectCurrentType:cell.type];
+    } else {
+        return YES;
+    }
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
     BZEditorToolCollectionViewCell *cell = (BZEditorToolCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
@@ -149,7 +157,7 @@
     
     BZEditorToolCollectionViewCell *cell = (BZEditorToolCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
 
-    if (self.selectBlock && cell.type < BZEditorTypeAddImage) {
+    if (self.selectBlock && cell.type < BZEditorTypeBlack) {
         self.selectBlock(cell.type);
     }
 }

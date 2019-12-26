@@ -11,7 +11,7 @@
 #import "UITextView+AddLink.h"
 #import "UITextView+AddImage.h"
 
-@interface BZEditorView () <UITextViewDelegate>
+@interface BZEditorView () <UITextViewDelegate, BZEditorToolViewDelegate>
 @property (nonatomic, strong) BZEditorManager *manager;
 @property (nonatomic, strong, readwrite) UITextView *editor;
 @property (nonatomic, strong, readwrite) BZEditorEditType *currentType;
@@ -33,6 +33,7 @@
     if (!_editor) {
         _editor = [[UITextView alloc] initWithFrame:self.bounds];
         _editor.delegate = self;
+        _editor.textContainerInset = UIEdgeInsetsMake(15, 5, 0, 5);
         _editor.returnKeyType = UIReturnKeyDone;
         _editor.backgroundColor = [UIColor systemBackgroundColor];
         _editor.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
@@ -49,60 +50,68 @@
     if (!_tool) {
         _tool = [[BZEditorToolView alloc] init];
         _tool.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, (40) * _tool.allToolArray.count - 5);
-
+        _tool.delegate = self;
         __block typeof(self) weakSelf = self;
         _tool.selectBlock = ^(BZEditorType type) {
           
+            BZEditorEditType *editType = nil;
+            if (weakSelf.editor.selectedTextRange.empty) {
+                editType = weakSelf.currentType;
+            } else {
+                editType = [BZEditorEditType defaultType];
+            }
+            
             if (type == BZEditorTypeB) {
-                weakSelf.currentType.useBold = !weakSelf.currentType.useBold;
+                editType.useBold = !editType.useBold;
             }
             if (type == BZEditorTypeI) {
-                weakSelf.currentType.useItalics = !weakSelf.currentType.useItalics;
+                editType.useItalics = !editType.useItalics;
             }
             if (type == BZEditorTypeU) {
-                weakSelf.currentType.useUnderline = !weakSelf.currentType.useUnderline;
+                editType.useUnderline = !editType.useUnderline;
             }
             
             if (type == BZEditorTypeStrikethrough) {
-                weakSelf.currentType.useStrikethrough = !weakSelf.currentType.useStrikethrough;
+                editType.useStrikethrough = !editType.useStrikethrough;
             }
             
             if (type == BZEditorTypeFont0 || type == BZEditorTypeFont1 || type == BZEditorTypeFont2) {
-                weakSelf.currentType.fontSize = type;
+                editType.fontSize = type;
             }
             
             if (type == BZEditorTypeBlack) {
-                weakSelf.currentType.fontColor = [UIColor blackColor];
+                editType.fontColor = [UIColor blackColor];
             } else if (type == BZEditorTypeRed) {
-                weakSelf.currentType.fontColor = [UIColor systemRedColor];
+                editType.fontColor = [UIColor systemRedColor];
             } else if (type == BZEditorTypeOrange) {
-                weakSelf.currentType.fontColor = [UIColor systemOrangeColor];
+                editType.fontColor = [UIColor systemOrangeColor];
             } else if (type == BZEditorTypeYellow) {
-                weakSelf.currentType.fontColor = [UIColor systemYellowColor];
+                editType.fontColor = [UIColor systemYellowColor];
             } else if (type == BZEditorTypeGreen) {
-                weakSelf.currentType.fontColor = [UIColor systemGreenColor];
+                editType.fontColor = [UIColor systemGreenColor];
             } else if (type == BZEditorTypeCyanColor) {
-                weakSelf.currentType.fontColor = [UIColor cyanColor];
+                editType.fontColor = [UIColor cyanColor];
             } else if (type == BZEditorTypeBlue) {
-                weakSelf.currentType.fontColor = [UIColor systemBlueColor];
+                editType.fontColor = [UIColor systemBlueColor];
             } else if (type == BZEditorTypePurple) {
-                weakSelf.currentType.fontColor = [UIColor systemPurpleColor];
+                editType.fontColor = [UIColor systemPurpleColor];
             }
             
             if (type >= BZEditorTypeParagraphLeft && type <= BZEditorTypeParagraphRight) {
-                weakSelf.currentType.paragraphStyle = type;
+                editType.paragraphStyle = type;
             }
             
             if (type == BZEditorTypeNormal) {
-                weakSelf.currentType = [BZEditorEditType defaultType];
+                editType = [BZEditorEditType defaultType];
             }
             
-            NSDictionary *typeAttribute = [weakSelf.manager currentAttributeWithType:weakSelf.currentType];
+            NSDictionary *typeAttribute = [weakSelf.manager currentAttributeWithType:editType];
+
             if (weakSelf.editor.selectedTextRange.empty) {
                 weakSelf.editor.typingAttributes = typeAttribute;
             } else {
                 NSMutableAttributedString *attribute = [weakSelf.editor.attributedText mutableCopy];
-                [attribute setAttributes:typeAttribute range:weakSelf.editor.selectedRange];
+                [attribute addAttributes:typeAttribute range:weakSelf.editor.selectedRange];
                 [weakSelf.editor setAttributedText:attribute];
             }
         };
@@ -135,6 +144,16 @@
 #pragma mark - UITextView Delegate
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
     return YES;
+}
+
+#pragma mark - ToolView Delegate
+- (BOOL)toolViewCanSelectCurrentType:(BZEditorType)editType {
+
+    if (editType >= BZEditorTypeParagraphLeft && editType <= BZEditorTypeParagraphRight) {
+        return !self.editor.selectedTextRange.isEmpty;
+    } else {
+        return YES;
+    }
 }
 
 @end

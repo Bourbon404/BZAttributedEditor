@@ -13,9 +13,17 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^DidSelectToolWitType)(BZEditorType type);
 typedef void(^DidSelectToolWitAction)(BZEditorType type);
 
+@protocol BZEditorToolViewDelegate <NSObject>
+
+@optional
+- (BOOL)toolViewCanSelectCurrentType:(BZEditorType)editType;
+
+@end
+
 @interface BZEditorToolView : UIView
 @property (nonatomic, copy) DidSelectToolWitType selectBlock;
 @property (nonatomic, copy) DidSelectToolWitAction actionBlock;
+@property (nonatomic, weak) id <BZEditorToolViewDelegate>delegate;
 @property (nonatomic, strong, readonly) NSMutableArray <UICollectionView *>*allToolArray;
 
 @end
